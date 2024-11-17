@@ -340,7 +340,7 @@ Return
 AboutEDLP:
 Gui, +Disabled
 Instruction := "EdibleDLP - until cooking version"
-Content := "Version 0.0-241118-1 beta release"
+Content := "Version 0.0-241118-1 beta release`nby pap-git"
 Title := "About EdibleDLP"
 MainIcon := 0xFFFD
 Flags := 0x10
