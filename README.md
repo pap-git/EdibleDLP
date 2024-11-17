@@ -1,6 +1,10 @@
 # EdibleDLP
 An yt-dlp based gui downloader created with AutoHotKey 1.1
 
+[<img src="https://img.shields.io/badge/Autohotkey_1.1-green?style=for-the-badge&logo=AutoHotkey">](http://www.autohotkey.com)
+[<img src="https://img.shields.io/badge/YT--DLP-gray?style=for-the-badge&logo=youtube">](http://github.com/yt-dlp/yt-dlp)
+[<img src="https://img.shields.io/badge/FFmpeg-black_green?style=for-the-badge&logo=ffmpeg">](http://ffmpeg.org)
+
 ## What is this?
 normal downloader with useless features
 
