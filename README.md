@@ -1,8 +1,6 @@
 # EdibleDLP
 An yt-dlp based gui downloader created with AutoHotKey 1.1
 
-> [!NOTE]
-> **This README.md is still work-in-progress!**
 ## What is this?
 normal downloader with useless features
 
