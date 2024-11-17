@@ -27,7 +27,7 @@ After that, select prefix from Prefix drop-down list, then select the path to do
 
 Default path is: `EdibleDLP.ahk/Downloaded`
 
-Then press **Download them** button or active the window and press Enter. Your order will be automatically downloaded.
+Then press **Download them** button or active the window and press Shift+Enter. Your order will be automatically downloaded.
 
 ## Available presets
 > [!IMPORTANT]
