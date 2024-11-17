@@ -2,9 +2,7 @@
 An yt-dlp based gui downloader created with AutoHotKey 1.1
 
 > [!NOTE]
-> Currently **there's only main source code and ffmpeg/ffprobe binaries in repository in this time.**
-> 
-> **Also, This README.md is still work-in-progress!**
+> **This README.md is still work-in-progress!**
 ## What is this?
 normal downloader with useless features
 
