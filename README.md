@@ -62,3 +62,15 @@ A. idk
 ## Known Issues / Suggestions
  - Needs better folder picker
  - Somewhat site detector won't works with Ctrl+Shift+V method
+
+## Credits
+ - **yt-dlp** (https://github.com/yt-dlp/yt-dlp) for video downloaders
+ - **ffmpeg** (https://ffmpeg.org/) for merge downloaded video/audios
+ - **Autohotkey** (https://autohotkey.com/) for GUI/Automating them
+ - **Autohotkey Wiki** (https://ahkwiki.net) for Japanese docs of Autohotkey
+ - Early Testers: @minottoplus, [Yukkuri7ch](https://x.com/Yukuri7ch)
+## License
+This script is licensed under the **GNU General Public License v3.0**
+> Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+
+Full license is in [LICENSE](https://github.com/pap-git/EdibleDLP/blob/main/LICENSE) file.
