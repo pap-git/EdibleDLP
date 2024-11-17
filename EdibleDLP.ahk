@@ -1,5 +1,24 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-; #Warn  ; Enable warnings to assist with detecting common errors.
+﻿/*
+EdibleDLP 0.0-241118-2 script by paphere/pap-git
+
+THIS COMMENT-OUT MUST NOT BE EDITED/DELETED/REMOVED!
+
+Before editing my code, you accept to this rules:
+ - You must not remove this comment-out
+ - You must write my @username and your username to "About" dialog
+ - You need to credit to me
+-----------------------------------------------------------------------------------------------
+This project is licensed under the GNU General Public License v3.0.
+
+| Permissions of this strong copyleft license are conditioned on making available complete
+| source code of licensed works and modifications, which include larger works using a licensed
+| work, under the same license. Copyright and license notices must be preserved. Contributors
+| provide an express grant of patent rights. 
+
+To see full license, Here is the link: https://github.com/pap-git/EdibleDLP/blob/main/LICENSE
+-----------------------------------------------------------------------------------------------
+*/
+
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
@@ -340,7 +359,7 @@ Return
 AboutEDLP:
 Gui, +Disabled
 Instruction := "EdibleDLP - until cooking version"
-Content := "Version 0.0-241118-1 beta release`nby pap-git"
+Content := "Version 0.0-241118-2 beta release`nby pap-git/paphere`nLicensed under the GNU General Public License v3.0"
 Title := "About EdibleDLP"
 MainIcon := 0xFFFD
 Flags := 0x10
@@ -404,3 +423,24 @@ AppClose:
 GuiDestroy:
 GuiClose:
 ExitApp
+
+/*
+EdibleDLP 0.0-241118-2 script by paphere/pap-git
+
+THIS COMMENT-OUT MUST NOT BE EDITED/DELETED/REMOVED!
+
+Before editing my code, you accept to this rules:
+ - You must not remove this comment-out
+ - You must write my @username and your username to "About" dialog
+ - You need to credit to me
+-----------------------------------------------------------------------------------------------
+This project is licensed under the GNU General Public License v3.0.
+
+| Permissions of this strong copyleft license are conditioned on making available complete
+| source code of licensed works and modifications, which include larger works using a licensed
+| work, under the same license. Copyright and license notices must be preserved. Contributors
+| provide an express grant of patent rights. 
+
+To see full license, Here is the link: https://github.com/pap-git/EdibleDLP/blob/main/LICENSE
+-----------------------------------------------------------------------------------------------
+*/
