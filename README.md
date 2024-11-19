@@ -39,6 +39,7 @@ Then press **Download them** button or active the window and press Shift+Enter. 
 > - 240p (MP4)
 > - 144p (MP4)
 > - Best Quality (Only MP3)
+> - Best Quality (Only WAV)
 
 > [!TIP]
 > Downloaded videos may not be played on **Windows Media Player** or **any player that not supporting VP9**.
