@@ -38,7 +38,6 @@ Then press **Download them** button or active the window and press Shift+Enter. 
 > - 360p (MP4)
 > - 240p (MP4)
 > - 144p (MP4)
-> - Best Quality (Only MP3)
 > - Best Quality (Only WAV)
 
 > [!TIP]
