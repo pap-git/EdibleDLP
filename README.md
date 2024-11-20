@@ -58,6 +58,8 @@ Then press **Download them** button or active the window and press Shift+Enter. 
 ## TroubleShooting / Q and A
 #### Q. Download stopped with `yt-dlp closed with errorlevel: X` lmfao
 A. i would like to add "bypass the errorlevel error" checkmark
+#### Q. Why there's no .exe file release?
+A. When I tried to compile to the exe by using Ahk2Exe, VirusTotal and @minottoplus just tell me false-possible result, so please compile it by yourself!
 #### Q. why are you wasting your time to this
 A. idk
 
