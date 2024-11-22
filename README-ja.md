@@ -67,6 +67,21 @@ A. これ最初に友達にexe化して配布したときウイルス判定さ�
 #### Q. こんなすくりぷとにまじになっちゃってどうするの
 A. 🤗
 
+## AHKからEXEファイルに変換する方法
+### なぜこれを掲載するの？
+ - タスクバーに固定できない！ごみ！みたいな意見が出たからには気にせずにはいられない
+ - かといってバイナリで配布するとWindows Defenderとかがウイルス扱いしてたまらない
+### やりかた
+[**Autohotkey 1.1**](https://www.autohotkey.com/download/ahk-install.exe)と[**Ahk2Exe**](https://github.com/AutoHotkey/Ahk2Exe/releases/latest)と**変換したいバージョンのEdibleDLP.ahk**をダウンロードしてください
+
+
+
+Autohotkeyはインストールを済ませておいてください
+
+そしたら**Ahk2Exeを開いて、Sourceって欄のところの右にあるBrowseボタンを押してEdibleDLP.ahkを参照してください**
+
+そしたら**Compileを押せばEdibleDLP.ahkと同じところにEdibleDLP.exeが出るはず**です
+
 ## すでにわかってる問題 / 意見
  - もっといいフォルダーピッカーがほしい
  - Ctrl+Shift+Vでコピペするとサイト検出機が動かない
