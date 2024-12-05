@@ -5,6 +5,8 @@ yt-dlp 用に作られたAutohotkey 1.1でつくったGUI用のダウンロー�
 [<img src="https://img.shields.io/badge/YT--DLP-gray?style=for-the-badge&logo=youtube">](http://github.com/yt-dlp/yt-dlp)
 [<img src="https://img.shields.io/badge/FFmpeg-black_green?style=for-the-badge&logo=ffmpeg">](http://ffmpeg.org)
 
+[**See English versions of README**](../main/README.md)
+
 ## なにこれ
 普通のダウンローダーにゴミ機能を追加しただけの代物
 
@@ -84,6 +86,7 @@ Autohotkeyはインストールを済ませておいてください
 
 ## すでにわかってる問題 / 意見
  - もっといいフォルダーピッカーがほしい
+   - 実装がめんどくさいので、**[Windhawk](https://windhawk.net/)の[Modernize Folder Picker Dialog](https://windhawk.net/mods/modernize-folder-picker-dialog)を使ってください**
  - Ctrl+Shift+Vでコピペするとサイト検出機が動かない
 
 ## クレジット
