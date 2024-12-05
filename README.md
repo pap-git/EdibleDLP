@@ -5,6 +5,8 @@ An yt-dlp based gui downloader created with AutoHotKey 1.1
 [<img src="https://img.shields.io/badge/YT--DLP-gray?style=for-the-badge&logo=youtube">](http://github.com/yt-dlp/yt-dlp)
 [<img src="https://img.shields.io/badge/FFmpeg-black_green?style=for-the-badge&logo=ffmpeg">](http://ffmpeg.org)
 
+[**日本語版を読む**](../main/README-ja.md)
+
 ## What is this?
 normal downloader with useless features
 
