@@ -36,11 +36,9 @@ Then press **Download them** button or active the window and press Shift+Enter. 
 ## Available presets
 > [!IMPORTANT]
 > These options are not tested: Please give me any issue or pull request if there's problem with it
-> - 480p (MP4)
 > - 360p (MP4)
 > - 240p (MP4)
 > - 144p (MP4)
-> - Best Quality (Only WAV)
 
 > [!TIP]
 > Downloaded videos may not be played on **Windows Media Player** or **any player that not supporting VP9**.
