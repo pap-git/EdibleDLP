@@ -1,4 +1,4 @@
-![header](https://github.com/user-attachments/assets/f16fd712-9c77-4b25-9202-433cc22b66e7)
+![header](https://github.com/user-attachments/assets/e160a7ab-e06f-4f3d-86ed-c6c2387a4b41)
 <h1 align="center"> EdibleDLP </h1>
 <p align="center">An yt-dlp based gui downloader created with AutoHotKey 1.1</p>
 
