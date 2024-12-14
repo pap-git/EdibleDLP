@@ -1,11 +1,21 @@
-# EdibleDLP
-yt-dlp 用に作られたAutohotkey 1.1でつくったGUI用のダウンローダー
+![header](https://github.com/user-attachments/assets/866c92f1-3237-4eb7-bef4-76cdbedea3a5)
+<h1 align="center"> EdibleDLP </h1>
+<p align="center">AutoHotKey 1.1でできたyt-dlpをつかったダウンローダー</p>
 
-[<img src="https://img.shields.io/badge/Autohotkey_1.1-green?style=for-the-badge&logo=AutoHotkey">](http://www.autohotkey.com)
-[<img src="https://img.shields.io/badge/YT--DLP-gray?style=for-the-badge&logo=youtube">](http://github.com/yt-dlp/yt-dlp)
-[<img src="https://img.shields.io/badge/FFmpeg-black_green?style=for-the-badge&logo=ffmpeg">](http://ffmpeg.org)
-
-[**See English versions of README**](../main/README.md)
+<p align="center">
+<a alt="Made with Autohotkey 1.1" href="http://www.autohotkey.com">
+  <img src="https://img.shields.io/badge/Autohotkey_1.1-green?style=for-the-badge&logo=AutoHotkey">
+</a>
+<a alt="Using yt-dlp to its downloader" href="http://github.com/yt-dlp/yt-dlp">
+  <img src="https://img.shields.io/badge/YT--DLP-gray?style=for-the-badge&logo=youtube">
+</a>
+<a alt="Using ffmpeg to its converter" href="http://www.ffmpeg.org">
+  <img src="https://img.shields.io/badge/FFmpeg-black_green?style=for-the-badge&logo=ffmpeg">
+</a>
+ <a alt="English version" href="../main/README.md">
+  <img src="https://img.shields.io/badge/English version-blue?style=for-the-badge">
+</a>
+</p>
 
 ## なにこれ
 普通のダウンローダーにゴミ機能を追加しただけの代物
