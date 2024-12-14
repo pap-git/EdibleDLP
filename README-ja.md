@@ -1,4 +1,5 @@
-![header](https://github.com/user-attachments/assets/866c92f1-3237-4eb7-bef4-76cdbedea3a5)
+![header](https://github.com/user-attachments/assets/fe342c1d-7699-48b5-80a6-185c1cf1f06e)
+
 <h1 align="center"> EdibleDLP </h1>
 <p align="center">AutoHotKey 1.1でできたyt-dlpをつかったダウンローダー</p>
 
