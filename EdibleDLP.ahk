@@ -1,5 +1,5 @@
 ﻿/*
-EdibleDLP 0.0-241214 script by paphere/pap-git
+EdibleDLP 0.0-241222 script by paphere/pap-git
 
 THIS COMMENT-OUT MUST NOT BE EDITED/DELETED/REMOVED!
 
@@ -107,6 +107,10 @@ IniRead, DIALOG_ERROR_YTDLP, lang.ini, %Language%, DIALOG_ERROR_YTDLP
 IniRead, DIALOG_WARN_CLEARLIST_TITLE, lang.ini, %Language%, DIALOG_WARN_CLEARLIST_TITLE
 IniRead, DIALOG_WARN_CLEARLIST_DESC, lang.ini, %Language%, DIALOG_WARN_CLEARLIST_DESC
 
+IniRead, IMPORT, lang.ini, %Language%, IMPORT
+IniRead, EXPORT, lang.ini, %Language%, EXPORT
+IniRead, GUI_MAIN_REENCODE, lang.ini, %Language%, GUI_MAIN_REENCODE
+
 Gui, Options:+LabelYTDLDLProgress
 Gui, YTDLDLProgress:-SysMenu +OwnDialogs
 Gui, YTDLDLProgress:Font,, Segoe UI
@@ -152,8 +156,10 @@ Gui, Font, s9 Norm, Segoe UI
 Gui, Add, Edit, vManualURL x20 yp+28 W271 H25
 
 Gui, Add, Button, gAddURL xp+281 W80, %GUI_MAIN_ADDURL%
-Gui, Add, Button, gRemoveURL x20 yp+30 W180, %GUI_MAIN_REMOVEURL%
-Gui, Add, Button, gClearList xp+181 W180, %GUI_MAIN_CLEARLIST%
+Gui, Add, Button, gImport x20 yp+30 W89, %IMPORT%
+Gui, Add, Button, gExportAsTXT xp+91 W89, %EXPORT%
+Gui, Add, Button, gRemoveURL xp+91 W89, %GUI_MAIN_REMOVEURL%
+Gui, Add, Button, gClearList xp+91 W89, %GUI_MAIN_CLEARLIST%
 
 Gui, Add, GroupBox, x10 yp+50 W380 H88, %GUI_MAIN_PRESET_TITLE%
 Gui, Add, Text, x20 yp+24, %GUI_MAIN_PRESETS%
@@ -167,12 +173,15 @@ Gui, Add, Radio, gRadio2 x20 yp+32, %GUI_MAIN_CUSTOM%
 Gui, Add, Edit, +Disabled vCustomLocation xp+90 yp-3 W210 H25
 Gui, Add, Button, +Disabled gBrowse vBrowseButton xp+211 yp-1 W60 H27, %GUI_MAIN_LOCATION_CUSTOM_BROWSE%
 
+Gui, Add, GroupBox, x10 yp+50 W380 H64, %GUI_MAIN_REENCODE%
+Gui, Add, DropDownList, x20 yp+24 vReEncode W360, None (Media Default)||Re-encode to H264|Re-encode to H265
+
 Gui, Add, Button, gDownloadVideo x20 yp+50 W180 H53, %GUI_MAIN_DOWNLOAD%`n(Shift+Enter)
 Gui, Add, Button, gUpdateDLP xp+181 W89, %GUI_MAIN_UPDATE%
 Gui, Add, Button, gAboutEDLP xp+91 W89, %GUI_MAIN_ABOUT%
 Gui, Add, Button, gAppClose xp-91 yp+27 W180, %GUI_MAIN_CLOSE%
 
-Gui, Show, W400 H644, EdibleDLP
+Gui, Show, W400 H714, EdibleDLP
 
 Return
 
@@ -194,6 +203,60 @@ GuiControl,, ManualURL,
 Return
 }
 Msgbox 0x10, %DIALOG_ERROR_WRONG_URL_TITLE%, %DIALOG_ERROR_WRONG_URL_DESC1%`n%DIALOG_ERROR_WRONG_URL_DESC2%
+Return
+
+Import:
+FileSelectFile, ImportFilePath, 1 2 4,, Load from txt ,Text File (*.txt)
+FileRead, ImportedURL, %ImportFilePath%
+If (ImportedURL=="") {
+Return
+} else {
+    Loop, Read, %ImportFilePath%
+    {
+        If RegExMatch(A_LoopReadLine, "^(https?://|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$")
+        {
+            MediaSearchIfManual()
+            LV_Add(Vis, MediaIs, A_LoopReadLine)
+            global MediaIs := "??"
+        } else If A_LoopReadLine==""
+        {
+            Break
+        }
+    }
+}
+ImportedURL := ""
+Return
+
+ExportAsTXT:
+LV_GetText(DLURL, LVRow, 2)
+
+If (DLURL == "") {
+Msgbox 0x10, %DIALOG_ERROR_EMPTYLIST_TITLE%, %DIALOG_ERROR_EMPTYLIST_DESC1%`n`n%DIALOG_ERROR_EMPTYLIST_DESC2%
+global LVRow := "1"
+Return
+}
+
+FileSelectFile, ExportFilePath, S16,, Save as txt ,Text File (*.txt)
+If (ExportFilePath=="") {
+Return
+} else {
+    IfExist, %DLURL%
+    {
+        FileDelete, %DLURL%
+    }
+    Loop {
+    LV_GetText(DLURL, LVRow, 2)
+    If (DLURL == "") {
+        global LVRow := "1"
+        Break
+    }
+    FileAppend, %DLURL%`n, %ExportFilePath%
+    LVRow++
+    DLURL := ""
+    }
+}
+
+ExportFilePath := ""
 Return
 
 RemoveURL:
@@ -253,37 +316,109 @@ Path := CustomLocation
 }
 
 If (PresetName=="1080p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="720p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="480p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=480][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="360p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=360][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=360][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=360][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=360][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="240p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=240][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=240][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=240][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=240][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="114p (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=114][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=114][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=114][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bestvideo[height<=114][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="Best Quality (No Options)") {
-RunWait, yt-dlp.exe -P "%Path%" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="Best Quality (MP4)") {
-RunWait, yt-dlp.exe -P "%Path%" -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" %DLURL% -S vcodec:h265,, Min
+    }
 }
 If (PresetName=="Best Quality (Only MP3)") {
-RunWait, yt-dlp.exe -P "%Path%" -x --audio-format mp3 %DLURL%
+RunWait, yt-dlp.exe -P "%Path%" -x --audio-format mp3 %DLURL% ,, Min
 }
 If (PresetName=="Best Quality (Only WAV)") {
-RunWait, yt-dlp.exe -P "%Path%" -x --audio-format wav %DLURL%
+RunWait, yt-dlp.exe -P "%Path%" -x --audio-format wav %DLURL% ,, Min
 }
 If (PresetName=="Custom") {
-RunWait, yt-dlp.exe -P "%Path%" %Prefix% %DLURL%
+    If (ReEncode=="None (Media Default)"){
+        RunWait, yt-dlp.exe -P "%Path%" %Prefix% %DLURL% ,, Min
+    }
+    If (ReEncode=="Re-encode to H264"){
+        RunWait, yt-dlp.exe -P "%Path%" %Prefix% %DLURL% -S vcodec:h264,, Min
+    }
+    If (ReEncode=="Re-encode to H265"){
+        RunWait, yt-dlp.exe -P "%Path%" %Prefix% %DLURL% -S vcodec:h265,, Min
+    }
 }
 
 If (ErrorLevel == 0) {
@@ -363,6 +498,25 @@ MediaIs := "nico"
 Return
 }
 
+MediaSearchIfImport(){
+
+    global
+
+    ;YT
+    
+    If RegExMatch(A_LoopReadLine, "^(https?://|www\.)youtu.be(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)youtube.com(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)[a-zA-Z0-9\-\.]+youtu.be(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)[a-zA-Z0-9\-\.]+youtube.com(/\S*)?$"){
+    MediaIs := "YT"
+    }
+    
+    ;nicovideo
+    If RegExMatch(A_LoopReadLine, "^(https?://|www\.)nico.ms(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)nicovideo.jp(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)[a-zA-Z0-9\-\.]+nico.ms(/\S*)?$") OR RegExMatch(A_LoopReadLine, "^(https?://|www\.)[a-zA-Z0-9\-\.]+nicovideo.jp(/\S*)?$"){
+    MediaIs := "nico"
+    }
+    
+    Return
+
+}
+
 Radio1:
 Gui, Submit, NoHide
 
@@ -428,7 +582,7 @@ Return
 AboutEDLP:
 Gui, +Disabled
 Instruction := "EdibleDLP - until cooking version"
-Content := "Version 0.0-241214 beta release`nby pap-git/paphere`nLicensed under the GNU General Public License v3.0"
+Content := "Version 0.0-241222 beta release`nby pap-git/paphere`nLicensed under the GNU General Public License v3.0"
 Title := "About EdibleDLP"
 MainIcon := 0xFFFD
 Flags := 0x10
@@ -493,7 +647,7 @@ GuiClose:
 ExitApp
 
 /*
-EdibleDLP 0.0-241214 script by paphere/pap-git
+EdibleDLP 0.0-241222 script by paphere/pap-git
 
 THIS COMMENT-OUT MUST NOT BE EDITED/DELETED/REMOVED!
 
