@@ -44,12 +44,6 @@ Default path is: `EdibleDLP.ahk/Downloaded`
 Then press **Download them** button or active the window and press Shift+Enter. Your order will be automatically downloaded.
 
 ## Available presets
-> [!IMPORTANT]
-> These options are not tested: Please give me any issue or pull request if there's problem with it
-> - 360p (MP4)
-> - 240p (MP4)
-> - 144p (MP4)
-
 > [!TIP]
 > Downloaded videos may not be played on **Windows Media Player** or **any player that not supporting VP9**.
 
